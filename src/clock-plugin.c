@@ -601,9 +601,8 @@ clock_plugin_init(ClockPlugin *plugin)
       gconf_client_notify_add(gc, "/apps/clock/time-format",
                               _gc_time_format_changed_cb, plugin, NULL, NULL);
 
-  /* FIXME - "/usr/share/locale", use define */
-  bindtextdomain("osso-clock", "/usr/share/locale");
-  bindtextdomain("hildon-libs", "/usr/share/locale");
+  bindtextdomain("osso-clock", LOCALE_DIR);
+  bindtextdomain("hildon-libs", LOCALE_DIR);
 
   _create_status_area_widgets(priv);
   hd_status_plugin_item_set_status_area_widget(HD_STATUS_PLUGIN_ITEM(plugin),
