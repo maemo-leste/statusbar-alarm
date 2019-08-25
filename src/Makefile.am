@@ -6,7 +6,7 @@ AM_CFLAGS = -Wall -Werror $(LIBHILDON_CFLAGS) $(HILDON_CFLAGS) $(OSSO_CFLAGS) \
 
 AM_LDFLAGS = -Wl,--as-needed $(LIBHILDON_LIBS) $(HILDON_LIBS) $(OSSO_LIBS) \
 	     $(STATUSBAR_ALARM_LIBS) $(GCONF_LIBS) $(TIME_LIBS) \
-	     -module -avoid-version -Wl, no-undefined
+	     -lm -module -avoid-version -Wl, no-undefined
 
 clock_plugin_la_SOURCES = clock-plugin.c
 
