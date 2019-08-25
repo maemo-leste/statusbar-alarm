@@ -144,7 +144,7 @@ _draw_status_menu_clock(ClockPlugin *plugin)
     gtk_image_set_from_pixbuf(GTK_IMAGE(priv->clock_image),
                               priv->icon_alarm_on);
   }
-  else if (tm.tm_hour >=6 && tm.tm_hour <= 17)
+  else if (tm.tm_hour < 6 || tm.tm_hour > 17)
   {
     gtk_image_set_from_pixbuf(GTK_IMAGE(priv->clock_image),
                               priv->icon_night_time);
@@ -354,28 +354,28 @@ _clock_image_expose_event_cb(GtkWidget *widget, GdkEvent *event,
 
   if (!priv->alarm_icon_visible)
   {
-    double tmp;
-    double hour_angle;
-    double min_angle; // d12
+    float tmp;
+    float hour_angle;
+    float min_angle;
     int sx = widget->allocation.x + 24 +
         (widget->allocation.width - widget->requisition.width) / 2;
     int sy = widget->allocation.y + 24 +
         (widget->allocation.height - widget->requisition.height) / 2;
-    double hour_fraction = (double)priv->min / 60.0;
+    float hour_fraction = priv->min / 60.0f;
 
-    tmp = hour_fraction - 0.25;
+    tmp = hour_fraction - 0.25f;
 
-    if (tmp > 1.0)
-      tmp = tmp - 1.0;
+    if (tmp > 1.0f)
+      tmp -= 1.0f;
 
-    if (tmp < 0.0)
-      tmp = tmp + 1.0;
+    if (tmp < 0.0f)
+      tmp += 1.0f;
 
-    hour_angle = (tmp + tmp) * 3.14159265;
+    hour_angle = tmp* 2.0f * M_PI;
 
-    tmp = (hour_fraction + (double)(priv->hour % 12 - 3)) / 12.0;
+    tmp = (hour_fraction + (priv->hour % 12 - 3)) / 12.0f;
 
-    min_angle = (tmp + tmp) * 3.14159265;
+    min_angle = tmp * 2.0f * M_PI;
 
     color = priv->clock_color;
 
@@ -385,16 +385,12 @@ _clock_image_expose_event_cb(GtkWidget *widget, GdkEvent *event,
 
     cairo_set_line_width(cr, 1.0);
     cairo_move_to(cr, sx, sy);
-
-    cairo_line_to(cr, sx + (int)cos(hour_angle) * 16.0,
-                  sy + (int)(sin(hour_angle) * 16.0));
+    cairo_line_to(cr, sx + cos(hour_angle) * 16.0, sy + sin(hour_angle) * 16.0);
     gdk_cairo_set_source_color(cr, &color);
     cairo_stroke(cr);
     cairo_set_line_width(cr, 2.0);
     cairo_move_to(cr, sx, sy);
-
-    cairo_line_to(cr, sx + (int)(cos(min_angle) * 13.0),
-                  sy + (int)(sin(min_angle) * 13.0));
+    cairo_line_to(cr, sx + cos(min_angle) * 13.0, sy + sin(min_angle) * 13.0);
     gdk_cairo_set_source_color(cr, &color);
     cairo_stroke(cr);
     cairo_restore(cr);
