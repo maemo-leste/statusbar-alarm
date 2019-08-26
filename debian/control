@@ -1,0 +1,14 @@
+Source: statusbar-alarm
+Section: x11
+Priority: optional
+Maintainer: Ivaylo Dimitrov <ivo.g.dimitrov.75@gmail.com>
+Build-Depends: debhelper (>= 9), autotools-dev,
+ statusbar-alarm-dev, libhildondesktop1-dev, libtime-dev,
+ libhildon1-dev, libosso-dev, libgconf2-dev
+Standards-Version: 3.7.2
+
+Package: statusbar-alarm
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ libhildon1, libtime0, libosso1, libhildondesktop1
+Description: Statusbar showing time and alarms
