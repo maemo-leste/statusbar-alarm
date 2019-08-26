@@ -6,3 +6,6 @@ CFLAGS += -Werror
 
 %:
 	dh $@ --with autoreconf
+
+override_dh_autoreconf:
+	dh_autoreconf --as-needed

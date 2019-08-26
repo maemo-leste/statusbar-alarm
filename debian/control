@@ -9,6 +9,6 @@ Standards-Version: 3.7.2
 
 Package: statusbar-alarm
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- libhildon1, libtime0, libosso1, libhildondesktop1
-Description: Statusbar showing time and alarms
+Depends: ${shlibs:Depends}, ${misc:Depends}, hildon-libs-l10n-mr | hildon-libs-l10n-mr0, osso-clock-l10n-mr | osso-clock-l10n-mr0
+Description:  Status Area plugin for Clock & Alarms
+ Plugin showing current time and indicating if there is any alarm set.
