@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Ivaylo Dimitrov <ivo.g.dimitrov.75@gmail.com>
 Build-Depends: debhelper (>= 9), autotools-dev,
  statusbar-alarm-dev, libhildondesktop1-dev, libtime-dev,
- libhildon1-dev, libosso-dev, libgconf2-dev
+ libhildon1-dev, libosso-dev, libgconf2-dev, osso-af-settings
 Standards-Version: 3.7.2
 
 Package: statusbar-alarm
