@@ -60,7 +60,6 @@ struct _ClockPluginPrivate
   gboolean time_fmt_24h;
   guint time_changed_id;
   guint gc_notify;
-  int field_5C;
   DBusConnection *session_bus;
   DBusConnection *system_bus;
   osso_context_t *osso;
