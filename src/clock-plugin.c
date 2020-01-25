@@ -20,7 +20,6 @@
 
 #define CLOCK_PLUGIN_TYPE (clock_plugin_get_type())
 #define CLOCK_PLUGIN(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), CLOCK_PLUGIN_TYPE, ClockPlugin))
-#define CLOCK_PLUGIN_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), CLOCK_PLUGIN_TYPE, ClockPluginPrivate))
 
 typedef struct _ClockPlugin ClockPlugin;
 typedef struct _ClockPluginClass ClockPluginClass;
@@ -66,7 +65,7 @@ struct _ClockPluginPrivate
   osso_display_state_t display_state;
 };
 
-HD_DEFINE_PLUGIN_MODULE(ClockPlugin, clock_plugin, HD_TYPE_STATUS_MENU_ITEM)
+HD_DEFINE_PLUGIN_MODULE_EXTENDED(ClockPlugin, clock_plugin, HD_TYPE_STATUS_MENU_ITEM, G_ADD_PRIVATE(ClockPlugin), , )
 
 static void
 clock_plugin_class_finalize(ClockPluginClass *klass)
@@ -460,8 +459,6 @@ static void
 clock_plugin_class_init(ClockPluginClass *klass)
 {
   G_OBJECT_CLASS(klass)->dispose = _clock_plugin_dispose;
-
-  g_type_class_add_private(klass, sizeof(ClockPluginPrivate));
 }
 
 static void
@@ -532,7 +529,7 @@ clock_plugin_init(ClockPlugin *plugin)
   char time_fmt[16];
   DBusError error;
 
-  priv = CLOCK_PLUGIN_GET_PRIVATE(plugin);
+  priv = (ClockPluginPrivate*)clock_plugin_get_instance_private(plugin);
   plugin->priv = priv;
   dbus_error_init(&error);
   priv->session_bus = dbus_bus_get(DBUS_BUS_SESSION, &error);
