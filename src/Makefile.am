@@ -16,3 +16,7 @@ hildonstatusmenudesktopentry_DATA = clock-plugin.desktop
 EXTRA_DIST = $(hildonstatusmenudesktopentry_DATA)
 
 MAINTAINERCLEANFILES = Makefile.in
+
+install-data-hook:
+	@(cd $(DESTDIR)$(hildondesktoplibdir) && $(RM) \
+		$(hildondesktoplib_LTLIBRARIES))
