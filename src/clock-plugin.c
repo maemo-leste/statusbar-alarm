@@ -65,7 +65,7 @@ struct _ClockPluginPrivate
   osso_display_state_t display_state;
 };
 
-HD_DEFINE_PLUGIN_MODULE_EXTENDED(ClockPlugin, clock_plugin, HD_TYPE_STATUS_MENU_ITEM, G_ADD_PRIVATE(ClockPlugin), , )
+HD_DEFINE_PLUGIN_MODULE_EXTENDED(ClockPlugin, clock_plugin, HD_TYPE_STATUS_MENU_ITEM, G_ADD_PRIVATE_DYNAMIC(ClockPlugin), , )
 
 static void
 clock_plugin_class_finalize(ClockPluginClass *klass)
