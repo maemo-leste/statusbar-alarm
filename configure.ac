@@ -12,6 +12,7 @@ AC_SUBST([LT_AGE])
 
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE
+LT_INIT([shared disable-static])
 AM_CONFIG_HEADER(config.h)
 AC_CONFIG_FILES([
 	Makefile
